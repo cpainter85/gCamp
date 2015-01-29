@@ -74,6 +74,16 @@
     </div>
 
   </div>
+
+  <div>
+
+    <% @quotes.each do |key, value| %>
+      <p><%=  value %>
+      <p class="text-muted"><em>- <%=  key %></em></p>
+      <% end %>
+
+  </div>
+  <!-- need to do this as an array or hash
   <div>
     <p>"gCamp has changed my life! It's the best tool I've ever used."</p>
     <p class="text-muted"><em>- Cayla Hayes</em></p>
@@ -81,5 +91,5 @@
     <p class="text-muted"><em>- Leta Jaskolski</em></p>
     <p>"Don't hesitate - sign up right now! You'll never be the same."</p>
     <p class="text-muted"><em>- Lavern Upton</em></p>
-  </div>
+  </div> -->
 </div>
