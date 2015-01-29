@@ -9,16 +9,28 @@
 <body>
   <nav class = "navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">gCamp</a>
+      <a class="navbar-brand" href="#"></a>
     </div>
   </nav>
 <%= yield %>
 <footer>
   <div class="container">
     <hr></hr>
+    <div class = "row">
+      <div class= "col-md-4">
     <%= link_to "About", about_path %>
     |
     <%= link_to "Terms", terms_path %>
+      </div>
+    <!--  Begin changes to footer to add Social media-->
+      <div class = "col-md-8 text-right">
+    <%= link_to image_tag("linked_in_icon.jpg", class: "footer_icon"), "https://www.linkedin.com/pub/charles-painter/39/4a6/15b" %>
+    <%= link_to image_tag("github_icon.png", class: "footer_icon"), "https://github.com/cpainter85" %>
+    <%= link_to image_tag("twitter_icon.png", class: "footer_icon"), "https://twitter.com/@charliegpainter" %>
+    <%= link_to image_tag("gschool_tag.png", class: "footer_icon"), "https://students.gschool.it/students/274" %>
+    <!--  end changes to add Social media -->
+      </div>
+    </div>
   </div>
 </footer>
 </body>
