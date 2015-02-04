@@ -1,0 +1,21 @@
+<div class="container">
+
+  <div class='page-header'>
+
+    <h1><a href id="top"></a>Frequently Asked Questions</h1>
+  </div>
+  <ul>
+    <% @question_and_answer.each do |question, answer| %>
+    <li><%= link_to question, faq_path(@faq, anchor: question.parameterize) %>
+    </li>
+    <% end %>
+  </ul>
+  <% @question_and_answer.each do |question, answer| %>
+
+  <h3 class="faq"><a href id=<%= p question.parameterize %>></a>
+    <%= p question %></h3>
+  <p class="faq"><%= p answer %></p>
+  <p><%= link_to "top", faq_path(@faq, anchor: "top") %>
+  <% end %>
+
+</div>
