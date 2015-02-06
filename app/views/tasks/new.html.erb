@@ -1,9 +1,21 @@
 <div class="container">
-  <h1>New task</h1>
-  <%= form_for @task do |f| %>
-    <p><%= f.label :description %></p>
-    <p><%= f.text_field :description %></p>
-    <p><%= f.submit %></p>
+  <div class="page-header">
+    <h1>New task</h1>
+  </div>
+
+  <%= form_for @task, hmtl: {class: "form-horizontal"} do |f| %>
+    <div class="form-group">
+      <div class="row">
+
+        <%= f.label :description, class: "col-sm-1" %>
+
+        <%= f.text_field :description, class: "col-sm-4" %>
+      </div>
+    </div>
+    <div class="row">
+      <%= f.submit class: "btn btn-primary col-sm-offset-1" %>
+      <%= link_to "Cancel", tasks_path, class: "btn btn-default" %>
+    </div>
   <% end %>
-  <p><%= link_to "Back", tasks_path %></p>
+
 </div>
