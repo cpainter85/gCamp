@@ -12,6 +12,13 @@
       <a class="navbar-brand" href="#">gCamp</a>
     </div>
   </nav>
+  <div class="container">
+    <p class="notice">
+      <% if notice %>
+        <%= notice %>
+      <% end %>
+    </p>
+</div>
 <%= yield %>
 <footer>
   <div class="container">
