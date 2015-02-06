@@ -13,11 +13,13 @@
     </div>
   </nav>
   <div class="container">
-    <p class="notice">
       <% if notice %>
+      <div class="alert alert-success">
+
         <%= notice %>
+      </div>
+
       <% end %>
-    </p>
 </div>
 <%= yield %>
 <footer>
