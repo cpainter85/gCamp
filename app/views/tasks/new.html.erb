@@ -3,7 +3,22 @@
     <h1>New task</h1>
   </div>
 
+  <!-- <ol class="breadcrumb">
+    <li> <%= link_to "Tasks", tasks_path %></li>
+    <li>New Task</li>
+  </ol> -->
+
+
   <%= form_for @task, hmtl: {class: "form-horizontal"} do |f| %>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-sm-4">
+          <%= link_to "Tasks", tasks_path %> > New Task
+        </div>
+      </div>
+    </div>
+
+
     <div class="form-group">
       <div class="row">
 
