@@ -1,6 +1,16 @@
 <div class="container">
-  <p><strong>Description: <%= @task.description %></strong></p>
-  <p><%= link_to "Edit", edit_task_path(@task) %> |
-  <%= link_to "Back", tasks_path %></p>
+  <div class="page-header">
+    <div class="pull-right">
+
+      <%= link_to "Edit", edit_task_path(@task), class: "btn btn-info" %>
+    </div>
+
+    <h1><%= @task.description %></h1>
+  </div>
+
+  <ol class="breadcrumb">
+    <li> <%= link_to "Tasks", tasks_path %></li>
+    <li>Finish Homework</li>
+  </ol>
 
 </div>
