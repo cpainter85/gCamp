@@ -35,12 +35,16 @@ body { padding-bottom: 70px; }
 }
 
 
-.breadcrumb > li + li:before {
-    content: "> ";
-    padding: 0 5px;
-    color: black;
-}
+// .breadcrumb > li + li:before {
+//     content: "> ";
+//     padding: 0 5px;
+//     color: black;
+// }
 
 .breadcrumb {
   background-color: white;
 }
+
+// .checkbox {
+//   padding-left: 1.5em;
+// }
