@@ -5,17 +5,28 @@
 
 
     <div class="form-group">
-          <%= f.label :description, class: "col-sm-1 control-label" %>
-        <div class="col-sm-6">
-          <%= f.text_field :description, class: "form-control", placeholder: "Description" %>
-        </div>
+      <%= f.label :description, class: "col-sm-1 control-label" %>
+      <div class="col-sm-6">
+        <%= f.text_field :description, class: "form-control", placeholder: "Description" %>
       </div>
+    </div>
 
-      <div class="form-group">
-        <div class="col-sm-offset-1 col-sm-6">
-          <%= f.submit class: "btn btn-primary"%>
-          <%= link_to "Cancel", tasks_path, class: "btn btn-default" %>
-        </div>
+    <div class="form-group">
+      <div class="col-sm-offset-1 col-sm-6">
+        <!-- <div class="checkbox"> -->
+            <%= f.check_box :complete %>
+            <%= f.label :complete %>
+        <!-- </div> -->
       </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-1 col-sm-6">
+        <%= f.submit class: "btn btn-primary"%>
+        <%= link_to "Cancel", tasks_path, class: "btn btn-default" %>
+      </div>
+    </div>
+
   <% end %>
+
 </div>
