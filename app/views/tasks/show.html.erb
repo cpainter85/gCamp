@@ -4,8 +4,11 @@
 
       <%= link_to "Edit", edit_task_path(@task), class: "btn btn-info" %>
     </div>
-
-    <h1><%= @task.description %></h1>
+    <% if @task.complete %>
+      <h1><s><%= @task.description %></s></h1>
+    <% else %>
+      <h1><%= @task.description %></h1>
+    <% end %>
   </div>
 
   <div class="row">
