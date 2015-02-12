@@ -9,6 +9,7 @@ Rails.application.routes.draw do
    get '/about', to: 'about#index'
    get '/faq', to: 'common_questions#index'
    resources :tasks
+   resources :users, only: [:index, :new]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
