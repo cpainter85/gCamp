@@ -1,0 +1,21 @@
+.container
+  .page-header
+    %h1
+      %a{:id => "top"}
+      Frequently Asked Questions
+
+  %ul
+    -@question_and_answer.each do |question, answer|
+      %li
+        =link_to question, faq_path(@faq, anchor: question.parameterize)
+
+  -@question_and_answer.each do |question, answer|
+    %h3.faq
+      %a{id: question.parameterize}
+
+
+      =p question
+    %p.faq
+      =p answer
+    %p
+      =link_to "top", faq_path(@faq, anchor: "top")
