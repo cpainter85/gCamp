@@ -16,10 +16,10 @@
       %li
         =@task.description
 
+  -if @task.due_date
+    %p
+      %strong Due On:
 
-  %p
-    %strong Due On:
-
-    -if @task.due_date
-      =@task.due_date.strftime("%m/%d/%Y")
-    -else
+      -if @task.due_date
+        =@task.due_date.strftime("%m/%d/%Y")
+    
