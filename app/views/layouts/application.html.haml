@@ -1,0 +1,36 @@
+!!! HTML
+%html
+  %head
+    %title gCamp
+    =stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    =javascript_include_tag 'application', 'data-turbolinks-track' => true
+    =csrf_meta_tags
+  %body
+    %nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        %a.navbar-brand{:href => "#"}gCamp
+    .container
+      -if notice
+        .alert.alert-success
+          =notice
+  =yield
+  %footer
+    .container
+      %hr
+      .row
+        .col-md-4
+          =link_to "About", about_path
+          |
+          =link_to "Terms", terms_path
+          |
+          =link_to "FAQ", faq_path
+          |
+          =link_to "Tasks", tasks_path
+          |
+          =link_to "Users", users_path
+        .col-md-8.text-right
+          =link_to image_tag("linked_in_icon.jpg", class: "footer_icon"), "https://www.linkedin.com/pub/charles-painter/39/4a6/15b"
+          =link_to image_tag("github_icon.png", class: "footer_icon"), "https://github.com/cpainter85"
+          =link_to image_tag("twitter_icon.png", class: "footer_icon"), "https://twitter.com/@charliegpainter"
+          =link_to image_tag("gschool_tag.png", class: "footer_icon"), "https://students.gschool.it/students/274"
+          
