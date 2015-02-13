@@ -1,0 +1,25 @@
+.container
+  .page-header
+    .pull-right
+      =link_to "Edit", edit_task_path(@task), class: "btn btn-info"
+    %h1
+      -if @task.complete
+        %s
+          =@task.description
+      -else
+        =@task.description
+
+  .row
+    %ol.breadcrumb
+      %li
+        =link_to "Tasks", tasks_path
+      %li
+        =@task.description
+
+
+  %p
+    %strong Due On:
+
+    -if @task.due_date
+      =@task.due_date.strftime("%m/%d/%Y")
+    -else

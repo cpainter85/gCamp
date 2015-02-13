@@ -1,0 +1,23 @@
+.form-horizontal
+  =form_for @task do |f|
+
+    .form-group
+      =f.label :description, class: "col-sm-1 control-label"
+      .col-sm-6
+        =f.text_field :description, class: "form-control", placeholder: "Description"
+
+    .form-group
+      =f.label :due_date, class: "col-sm-1 control-label"
+      .col-sm-2
+        =f.date_field :due_date, class: "form-control"
+
+    .form-group
+      .col-sm-offset-1.col-sm-6
+        -if @task.id
+          =f.check_box :complete
+          =f.label :complete
+
+    .form-group
+      .col-sm-offset-1.col-sm-6
+        =f.submit class: "btn btn-primary"
+        =link_to "Cancel", tasks_path, class: "btn btn-default"
