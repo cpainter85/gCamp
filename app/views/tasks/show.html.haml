@@ -13,7 +13,7 @@
     %ol.breadcrumb
       %li
         =link_to "Tasks", tasks_path
-      %li
+      %li.active
         =@task.description
 
   -if @task.due_date
@@ -22,4 +22,3 @@
 
       -if @task.due_date
         =@task.due_date.strftime("%m/%d/%Y")
-    
