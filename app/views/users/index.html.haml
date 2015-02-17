@@ -17,3 +17,6 @@
             =user.last_name
           %td
             =mail_to user.email
+          %td
+            .pull-right
+              =link_to 'edit', edit_user_path(user)
