@@ -2,12 +2,11 @@
   .page-header
     %h1 Edit task
 
-  .row
-    %ol.breadcrumb
-      %li
-        =link_to "Tasks", tasks_path
-      %li
-        =link_to @task.description, task_path(@task)
-      %li.active Edit
+  %ol.breadcrumb
+    %li
+      =link_to "Tasks", tasks_path
+    %li
+      =link_to @task.description, task_path(@task)
+    %li.active Edit
 
   =render "form"

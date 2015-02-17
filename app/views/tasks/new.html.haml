@@ -2,10 +2,9 @@
   .page-header
     %h1 New task
 
-  .row
-    %ol.breadcrumb
-      %li
-        =link_to "Tasks", tasks_path
-      %li.active New Task
+  %ol.breadcrumb
+    %li
+      =link_to "Tasks", tasks_path
+    %li.active New Task
 
   =render "form"

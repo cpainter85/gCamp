@@ -9,12 +9,11 @@
       -else
         =@task.description
 
-  .row
-    %ol.breadcrumb
-      %li
-        =link_to "Tasks", tasks_path
-      %li.active
-        =@task.description
+  %ol.breadcrumb
+    %li
+      =link_to "Tasks", tasks_path
+    %li.active
+      =@task.description
 
   -if @task.due_date
     %p
