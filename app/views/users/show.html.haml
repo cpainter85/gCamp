@@ -1,0 +1,13 @@
+.container
+  .page-header
+    %h1
+      =@user.first_name + ' ' + @user.last_name
+  %p
+    %strong First Name:
+    =@user.first_name
+  %p
+    %strong Last Name:
+    =@user.last_name
+  %p
+    %strong Email:
+    =@user.email

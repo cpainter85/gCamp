@@ -13,8 +13,7 @@
       - @users.each do |user|
         %tr
           %td.col-sm-2
-            =user.first_name
-            =user.last_name
+            =link_to user.first_name+' '+user.last_name, user_path(user)
           %td
             =mail_to user.email
           %td
