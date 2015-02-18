@@ -35,7 +35,7 @@ class UsersController < ApplicationController
 
   def destroy
     User.destroy(params[:id])
-    redirect_to users_path
+    redirect_to users_path, notice: 'User was successfully deleted.'
   end
 
   private

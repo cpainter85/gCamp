@@ -1,13 +1,13 @@
 .container
   .page-header
+    .pull-right
+      =link_to "Edit", edit_user_path(@user), class: "btn btn-info"
     %h1
       =@user.first_name + ' ' + @user.last_name
-  %p
-    %strong First Name:
-    =@user.first_name
-  %p
-    %strong Last Name:
-    =@user.last_name
-  %p
-    %strong Email:
-    =@user.email
+  %dl.dl-horizontal
+    %dt First name
+    %dd=@user.first_name
+    %dt Last name
+    %dd=@user.last_name
+    %dt Email
+    %dd=mail_to @user.email
