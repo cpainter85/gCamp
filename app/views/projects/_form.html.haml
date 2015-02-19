@@ -1,0 +1,12 @@
+.form-horizontal
+  =form_for @project do |f|
+
+    .form-group
+      =f.label :name, class: "col-sm-2 control-label"
+      .col-sm-6
+        =f.text_field :name, class: "form-control"
+
+    .form-group
+      .col-sm-offset-2.col-sm-6
+        =f.submit class: "btn btn-primary"
+        =link_to "Cancel", projects_path, class: "btn btn-default"
