@@ -11,4 +11,4 @@
     %tbody
       -@projects.each do |project|
         %tr
-          %td=project.name
+          %td=link_to project.name, project_path(project)

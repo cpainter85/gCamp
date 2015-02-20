@@ -1,0 +1,6 @@
+.container
+  .page-header
+    .pull-right
+      =link_to "Edit", edit_project_path(@project), class: "btn btn-info"
+      =link_to "Delete", project_path(@project), method: :delete, class: "btn btn-danger"
+    %h1=@project.name
