@@ -20,8 +20,8 @@
       .col-sm-offset-2.col-sm-6
         =f.submit class: "btn btn-primary"
         =link_to "Cancel", users_path, class: "btn btn-default"
-    .form-group
-      .col-sm-offset-2.col-sm-6
-        .well.text-center
-          -if @user.id
+    -if @user.id
+      .form-group
+        .col-sm-offset-2.col-sm-6
+          .well.text-center
             =link_to "Delete User", user_path(@user), method: :delete, class: "btn btn-danger"
