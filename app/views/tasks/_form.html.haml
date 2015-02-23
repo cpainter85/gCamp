@@ -1,5 +1,14 @@
 .form-horizontal
   =form_for @task do |f|
+    .form-group
+      .col-sm-offset-1.col-sm-7
+        -if @task.errors.any?
+          .alert.alert-danger
+            %h3 1 error prohibited this form from being saved:
+            %ul
+              -@task.errors.full_messages.each do |message|
+                %li=message
+
 
     .form-group
       =f.label :description, class: "col-sm-1 control-label"
