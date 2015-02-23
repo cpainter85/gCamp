@@ -4,7 +4,11 @@
       .col-sm-offset-1.col-sm-7
         -if @task.errors.any?
           .alert.alert-danger
-            %h3 1 error prohibited this form from being saved:
+            %h3
+              -if @task.errors.full_messages.length > 1
+                ="#{@task.errors.full_messages.length} errors prohibited this form from being saved:"
+              -else
+                ='1 error prohibited this form from being saved:'
             %ul
               -@task.errors.full_messages.each do |message|
                 %li=message

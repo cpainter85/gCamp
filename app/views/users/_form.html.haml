@@ -2,6 +2,19 @@
   =form_for @user do |f|
 
     .form-group
+      .col-sm-offset-2.col-sm-7
+        -if @user.errors.any?
+          .alert.alert-danger
+            %h3
+              -if @user.errors.full_messages.length > 1
+                ="#{@user.errors.full_messages.length} errors prohibited this form from being saved:"
+              -else
+                ='1 error prohibited this form from being saved:'
+            %ul
+              -@user.errors.full_messages.each do |message|
+                %li=message
+
+    .form-group
       =f.label :first_name, class: "col-sm-2 control-label"
       .col-sm-6
         =f.text_field :first_name, class: "form-control"
