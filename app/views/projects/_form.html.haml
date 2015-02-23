@@ -1,5 +1,13 @@
 .form-horizontal
   =form_for @project do |f|
+    .form-group
+      .col-sm-offset-2.col-sm-7
+        -if @project.errors.any?
+          .alert.alert-danger
+            %h3 1 error prohibited this form from being saved:
+            %ul
+              -@project.errors.full_messages.each do |message|
+                %li=message
 
     .form-group
       =f.label :name, class: "col-sm-2 control-label"
