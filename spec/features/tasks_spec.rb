@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Tasks' do
 
   before :each do
-    @task = Task.create(description: 'Example Task', due_date: '2015-04-15')
+    Task.create(description: 'Example Task', due_date: '2015-04-15')
   end
 
   scenario 'User can create a new task' do
