@@ -8,12 +8,17 @@
   %body
     %nav.navbar.navbar-inverse.navbar-fixed-top
       .container
-        %a.navbar-brand{:href => "#"}gCamp
+        .navbar-header
+          =link_to 'gCamp', root_path, class: 'navbar-brand'
+        .collapse.navbar-collapse
+          %ul.nav.navbar-nav.navbar-right
+            %li=link_to 'Sign Up', sign_up_path
+
     .container
       -if notice
         .alert.alert-success
           =notice
-  =yield
+    =yield
   %footer
     .container
       %hr

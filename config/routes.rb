@@ -8,6 +8,10 @@ Rails.application.routes.draw do
    get '/terms', to: 'terms#index'
    get '/about', to: 'about#index'
    get '/faq', to: 'common_questions#index'
+
+   get 'sign-up', to: 'registrations#new'
+   post 'sign-up', to: 'registrations#create'
+
    resources :tasks
    resources :users
    resources :projects
