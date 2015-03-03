@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User can sign in with valid credentials' do
+feature 'User sign in' do
 
   before :each do
     @user = User.create(first_name: 'Matt',
