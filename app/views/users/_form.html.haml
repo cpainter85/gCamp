@@ -6,26 +6,36 @@
         =render partial: 'shared/errors', locals: {object: @user }
 
     .form-group
-      =f.label :first_name, class: "col-sm-2 control-label"
+      =f.label :first_name, class: 'col-sm-2 control-label'
       .col-sm-6
-        =f.text_field :first_name, class: "form-control"
+        =f.text_field :first_name, class: 'form-control'
 
     .form-group
-      =f.label :last_name, class: "col-sm-2 control-label"
+      =f.label :last_name, class: 'col-sm-2 control-label'
       .col-sm-6
-        =f.text_field :last_name, class: "form-control"
+        =f.text_field :last_name, class: 'form-control'
 
     .form-group
-      =f.label :email, class: "col-sm-2 control-label"
+      =f.label :email, class: 'col-sm-2 control-label'
       .col-sm-6
-        =f.email_field :email, class: "form-control"
+        =f.email_field :email, class: 'form-control'
+
+    .form-group
+      =f.label :password, class: 'col-sm-2 control-label'
+      .col-sm-6
+        =f.password_field :password, class: 'form-control'
+
+    .form-group
+      =f.label :password_confirmation, class: 'col-sm-2 control-label'
+      .col-sm-6
+        =f.password_field :password_confirmation, class: 'form-control'
 
     .form-group
       .col-sm-offset-2.col-sm-6
-        =f.submit class: "btn btn-primary"
-        =link_to "Cancel", users_path, class: "btn btn-default"
+        =f.submit class: 'btn btn-primary'
+        =link_to 'Cancel', users_path, class: 'btn btn-default'
     -if @user.id
       .form-group
         .col-sm-offset-2.col-sm-6
           .well.text-center
-            =link_to "Delete User", user_path(@user), method: :delete, class: "btn btn-danger"
+            =link_to 'Delete User', user_path(@user), method: :delete, class: 'btn btn-danger'
