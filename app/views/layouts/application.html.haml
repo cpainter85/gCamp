@@ -12,7 +12,11 @@
           =link_to 'gCamp', root_path, class: 'navbar-brand'
         .collapse.navbar-collapse
           %ul.nav.navbar-nav.navbar-right
-            %li=link_to 'Sign Up', sign_up_path
+            -if current_user
+              %li=link_to "#{current_user.first_name} #{current_user.last_name}", user_path(current_user)
+            -else
+              %li=link_to 'Sign Up', sign_up_path
+
 
     .container
       -if notice
