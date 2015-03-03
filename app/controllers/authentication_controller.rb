@@ -1,4 +1,7 @@
 class AuthenticationController < ApplicationController
+
+  skip_before_action :ensure_current_user
+
   def destroy
     session[:user_id] = nil
     redirect_to root_path, notice: 'You have successfully signed out'

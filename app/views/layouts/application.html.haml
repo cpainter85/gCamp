@@ -21,9 +21,12 @@
 
 
     .container
-      -if notice
+      -if flash[:notice]
         .alert.alert-success
           =notice
+      -if flash[:alert]
+        .alert.alert-danger
+          =alert
     =yield
   %footer
     .container
@@ -35,12 +38,13 @@
           =link_to "Terms", terms_path
           |
           =link_to "FAQ", faq_path
-          |
-          =link_to "Tasks", tasks_path
-          |
-          =link_to "Users", users_path
-          |
-          =link_to "Projects", projects_path
+          -if current_user
+            |
+            =link_to "Tasks", tasks_path
+            |
+            =link_to "Users", users_path
+            |
+            =link_to "Projects", projects_path
         .col-md-8.text-right
           =link_to image_tag("linked_in_icon.jpg", class: "footer_icon"), "https://www.linkedin.com/pub/charles-painter/39/4a6/15b"
           =link_to image_tag("github_icon.png", class: "footer_icon"), "https://github.com/cpainter85"
