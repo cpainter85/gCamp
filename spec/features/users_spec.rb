@@ -4,9 +4,15 @@ feature 'Users' do
 
   before :each do
     User.create(first_name: 'Matt',
-                last_name: 'Murdock',
-                email: 'iamnotdaredevil@email.com',
-                password: 'bornagain')
+                  last_name: 'Murdock',
+                  email: 'iamnotdaredevil@email.com',
+                  password: 'bornagain')
+    visit root_path
+    click_on 'Sign In'
+    fill_in 'Email', with: 'iamnotdaredevil@email.com'
+    fill_in 'Password', with: 'bornagain'
+    within('.sign-in-form') { click_on 'Sign In' }
+
   end
 
   scenario 'User can create a new user' do
@@ -28,7 +34,7 @@ feature 'Users' do
   scenario 'User can see a show page for a user' do
     visit root_path
     click_on 'Users'
-    click_on 'Matt Murdock'
+    within('.table') { click_on 'Matt Murdock' }
 
     expect(page).to have_content('First name Matt')
     expect(page).to have_content('Last name Murdock')
@@ -39,7 +45,7 @@ feature 'Users' do
   scenario 'User can edit a user' do
     visit root_path
     click_on 'Users'
-    click_on 'Matt Murdock'
+    within('.table') { click_on 'Matt Murdock' }
     click_on 'Edit'
     fill_in 'First name', with: 'Daniel'
     fill_in 'Last name', with: 'Rand'
@@ -55,15 +61,19 @@ feature 'Users' do
   end
 
   scenario 'Users can delete a user' do
+    User.create(first_name: 'Rick',
+                last_name: 'Grimes',
+                email: 'walkingdead@email.com',
+                password: 'karl')
     visit root_path
     click_on 'Users'
-    click_on 'Matt Murdock'
+    within('.table') { click_on 'Rick Grimes'}
     click_on 'Edit'
     click_on 'Delete User'
 
     expect(page).to have_content('User was successfully deleted.')
-    expect(page).to have_no_content('Matt Murdock')
-    expect(page).to have_no_content('iamnotdaredevil@email.com')
+    expect(page).to have_no_content('Rick Grimes')
+    expect(page).to have_no_content('walkingdead@email.com')
   end
 
   scenario 'Users must have a first name, last name, an email, and a password' do

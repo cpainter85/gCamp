@@ -3,6 +3,15 @@ require 'rails_helper'
 feature 'Projects' do
 
   before :each do
+    User.create(first_name: 'Rick',
+                last_name: 'Grimes',
+                email: 'walkingdead@email.com',
+                password: 'karl')
+    visit root_path
+    click_on 'Sign In'
+    fill_in 'Email', with: 'walkingdead@email.com'
+    fill_in 'Password', with: 'karl'
+    within('.sign-in-form') { click_on 'Sign In' }
     Project.create(name: 'Project Rebirth')
   end
 

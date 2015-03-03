@@ -4,13 +4,13 @@
 
     -if @authentication_error
       %p.text-danger=@authentication_error
-
-    =form_tag url: sign_in_path do |f|
-      .form-group
-        =label_tag :email
-        =email_field_tag :email, nil, class: 'form-control'
-      .form-group
-        =label_tag :password
-        =password_field_tag :password, nil, class: 'form-control'
-      .form-group
-        =submit_tag 'Sign In', class: 'btn btn-primary'
+    .sign-in-form
+      =form_tag url: sign_in_path do |f|
+        .form-group
+          =label_tag :email
+          =email_field_tag :email, nil, class: 'form-control'
+        .form-group
+          =label_tag :password
+          =password_field_tag :password, nil, class: 'form-control'
+        .form-group
+          =submit_tag 'Sign In', class: 'btn btn-primary'
