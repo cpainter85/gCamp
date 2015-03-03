@@ -14,7 +14,7 @@ class AuthenticationController < ApplicationController
       session[:user_id] = user.id
       redirect_to root_path, notice: 'You have successfully signed in'
     else
-      flash[:notice] = 'Username / password combination is invalid'
+      @authentication_error = 'Email / Password combination is invalid'
       render :new
     end
   end
