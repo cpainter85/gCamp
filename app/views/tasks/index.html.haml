@@ -2,7 +2,13 @@
   .page-header
     .pull-right
       =link_to "New Task", new_project_task_path(@project), class: "btn btn-info"
-    %h1 Tasks
+    %h1="Tasks for #{@project.name}"
+
+  %ol.breadcrumb
+    %li=link_to 'Projects', projects_path
+    %li=link_to @project.name, project_path(@project)
+    %li.active Tasks
+
 
   %table.table
     %thead
