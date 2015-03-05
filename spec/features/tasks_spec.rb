@@ -12,13 +12,15 @@ feature 'Tasks' do
     fill_in 'Email', with: 'walkingdead@email.com'
     fill_in 'Password', with: 'karl'
     within('.sign-in-form') { click_on 'Sign In' }
-
-    Task.create(description: 'Example Task', due_date: '2015-04-15')
+    @project = Project.create(name: 'Example Project')
+    @task = @project.tasks.create(description: 'Example Task', due_date: '2015-04-15')
   end
 
   scenario 'User can create a new task' do
     visit root_path
-    click_on 'Tasks'
+    click_on 'Projects'
+    click_link 'Example Project'
+    click_link 'Task'
     click_on 'New Task'
     fill_in 'Description', with: 'Test Task'
     fill_in 'Due date', with: '2015-03-03'
@@ -30,8 +32,7 @@ feature 'Tasks' do
 
   scenario 'User can see a show page for tasks' do
 
-    visit root_path
-    click_on 'Tasks'
+    visit project_tasks_path(@project)
     click_on 'Example Task'
     expect(page).to have_content 'Example Task'
     expect(page).to have_content 'Due On: 04/15/2015'
@@ -39,9 +40,7 @@ feature 'Tasks' do
   end
 
   scenario 'Users can edit a task from show page' do
-    visit root_path
-    click_on 'Tasks'
-    click_on 'Example Task'
+    visit project_task_path(@project, @task)
     click_on 'Edit'
     fill_in 'Description', with: 'Updated Task'
     fill_in 'Due date', with: '2016-06-17'
@@ -54,8 +53,7 @@ feature 'Tasks' do
   end
 
   scenario 'User can delete a task' do
-    visit root_path
-    click_on 'Tasks'
+    visit project_tasks_path(@project)
     expect(page).to have_content('Example Task')
     click_on 'Delete'
     expect(page).to have_content('Task was successfully deleted.')
@@ -63,8 +61,7 @@ feature 'Tasks' do
   end
 
   scenario 'User sees error message if tries to create a task without a description' do
-    visit root_path
-    click_on 'Tasks'
+    visit project_tasks_path(@project)
     click_on 'New Task'
     click_on 'Create Task'
 

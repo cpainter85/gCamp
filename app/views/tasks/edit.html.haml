@@ -3,10 +3,10 @@
     %h1 Edit task
 
   %ol.breadcrumb
-    %li
-      =link_to "Tasks", tasks_path
-    %li
-      =link_to @task.description, task_path(@task)
+    %li=link_to 'Projects', projects_path
+    %li=link_to @project.name, project_path(@project)
+    %li=link_to "Tasks", project_tasks_path(@project)
+    %li=link_to @task.description, project_task_path(@project, @task)
     %li.active Edit
 
   =render "form"

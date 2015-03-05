@@ -1,5 +1,5 @@
 .form-horizontal
-  =form_for @task do |f|
+  =form_for [@project, @task] do |f|
     .form-group
       .col-sm-offset-1.col-sm-7
         =render partial: 'shared/errors', locals: {object: @task}
@@ -24,4 +24,4 @@
     .form-group
       .col-sm-offset-1.col-sm-6
         =f.submit class: "btn btn-primary"
-        =link_to "Cancel", tasks_path, class: "btn btn-default"
+        =link_to "Cancel", project_tasks_path(@project), class: "btn btn-default"
