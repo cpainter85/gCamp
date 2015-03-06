@@ -19,8 +19,17 @@
         .form-group
           =f.collection_select(:role_id, Role.all, :id, :name, {}, {class: 'form-control'})
         .form-group
-          =f.submit class: 'btn btn-primary'
+          =f.submit 'Add New Member', class: 'btn btn-primary'
 
   -@project.memberships.each do |membership|
     -if membership.id
-      %p=link_to membership.user.full_name, user_path(membership.user)
+      %p
+        =form_for [@project, membership] do |f|
+          .row
+            .form-group.col-md-2
+              =link_to membership.user.full_name, user_path(membership.user)
+
+            .form-group.col-md-4
+              =f.collection_select(:role_id, Role.all, :id, :name, {prompt: membership.role}, class: 'form-control')
+            .form-group
+              =f.submit 'Update', class: 'btn btn-primary'
