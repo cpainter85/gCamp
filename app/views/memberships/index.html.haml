@@ -7,6 +7,10 @@
     %li=link_to @project.name, project_path(@project)
     %li Memberships
 
+  .row
+    .col-md-7
+      =render partial: 'shared/errors', locals: {object: @membership}
+
   .well
     .form-inline
       =form_for [@project, @membership] do |f|
@@ -17,7 +21,6 @@
         .form-group
           =f.submit class: 'btn btn-primary'
 
-
-  -@memberships.each do |membership|
+  -@project.memberships.each do |membership|
     -if membership.id
       %p=link_to membership.user.full_name, user_path(membership.user)

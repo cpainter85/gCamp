@@ -5,16 +5,16 @@ class MembershipsController < ApplicationController
   end
 
   def index
-    @memberships = @project.memberships
     @membership = @project.memberships.new
   end
 
   def create
     @membership = @project.memberships.new(membership_params)
     if @membership.save
-      redirect_to project_memberships_path(@project), notice: "#{@membership.user.full_name} was successfully added"
+      flash[:notice] = "#{@membership.user.full_name} was successfully added"
+      redirect_to project_memberships_path(@project)
     else
-      render :new
+      render :index
     end
   end
 
