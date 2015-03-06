@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
    resources :projects do
      resources :tasks
+     resources :memberships, only: [:index]
    end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
