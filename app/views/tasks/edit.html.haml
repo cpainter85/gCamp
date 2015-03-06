@@ -7,6 +7,6 @@
     %li=link_to @project.name, project_path(@project)
     %li=link_to "Tasks", project_tasks_path(@project)
     %li=link_to @task.description, project_task_path(@project, @task)
-    %li.active Edit
+    %li Edit
 
   =render "form"

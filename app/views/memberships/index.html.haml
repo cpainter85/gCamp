@@ -1,3 +1,23 @@
 .container
   .page-header
     %h1="#{@project.name}: Manage Members"
+
+  %ol.breadcrumb
+    %li=link_to 'Projects', projects_path
+    %li=link_to @project.name, project_path(@project)
+    %li Memberships
+
+  .well
+    .form-inline
+      =form_for [@project, @membership] do |f|
+        .form-group
+          =f.collection_select(:user_id, User.all, :id, :full_name, {prompt: 'Please select a user...'}, {class: 'form-control'})
+        .form-group
+          =f.collection_select(:role_id, Role.all, :id, :name, {}, {class: 'form-control'})
+        .form-group
+          =f.submit class: 'btn btn-primary'
+
+
+  -@memberships.each do |membership|
+    -if membership.id
+      %p=link_to membership.user.full_name, user_path(membership.user)

@@ -7,7 +7,7 @@
 
   %ol.breadcrumb
     %li=link_to 'Projects', projects_path
-    %li.active=@project.name
+    %li=@project.name
 
   %p=link_to pluralize(@project.tasks.count, 'Task'), project_tasks_path(@project)
   %p=link_to pluralize(@project.memberships.count, 'Membership'), project_memberships_path(@project)
