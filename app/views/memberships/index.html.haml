@@ -11,7 +11,7 @@
     .col-md-7
       =render partial: 'shared/errors', locals: {object: @membership}
 
-  .well
+  .well.col-md-7
     .form-inline
       =form_for [@project, @membership] do |f|
         .form-group
@@ -21,15 +21,15 @@
         .form-group
           =f.submit 'Add New Member', class: 'btn btn-primary'
 
-  -@project.memberships.each do |membership|
-    -if membership.id
-      %p
-        =form_for [@project, membership] do |f|
-          .row
-            .form-group.col-md-2
-              =link_to membership.user.full_name, user_path(membership.user)
+  .col-md-7
+    %table.table
 
-            .form-group.col-md-4
-              =f.collection_select(:role_id, Role.all, :id, :name, {prompt: membership.role}, class: 'form-control')
-            .form-group
-              =f.submit 'Update', class: 'btn btn-primary'
+      %tbody
+        -@project.memberships.each do |membership|
+          -if membership.id
+            %tr
+              =form_for [@project, membership] do |f|
+                %td=link_to membership.user.full_name, user_path(membership.user)
+                %td=f.collection_select(:role_id, Role.all, :id, :name, {prompt: membership.role}, class: 'form-control')
+                %td=f.submit 'Update', class: 'btn btn-primary'
+                %td=link_to '', project_membership_path(@project, membership), method: :delete, class: 'glyphicon glyphicon-remove'
