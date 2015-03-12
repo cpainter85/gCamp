@@ -21,3 +21,13 @@
 
       -if @task.due_date
         =@task.due_date.strftime("%m/%d/%Y")
+
+  %h3 Comments
+
+  -@task.comments.each do |comment|
+    .row
+      .col-md-3
+        =link_to comment.user.full_name, user_path(comment.user)
+        .text-muted=comment.time_ago_in_words
+      .col-md-9
+        =comment.content
