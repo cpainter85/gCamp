@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+gem 'pry'
 gem 'haml'
 gem 'rails_12factor', '~> 0.0.3', group: :production
 
