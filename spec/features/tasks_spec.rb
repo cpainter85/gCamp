@@ -55,7 +55,8 @@ feature 'Tasks' do
   scenario 'User can delete a task' do
     visit project_tasks_path(@project)
     expect(page).to have_content('Example Task')
-    click_on 'Delete'
+    page.find('.glyphicon-remove').click
+
     expect(page).to have_content('Task was successfully deleted.')
     expect(page).to have_no_content('Example Task')
   end
