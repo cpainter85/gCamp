@@ -2,7 +2,6 @@
   .page-header
     .pull-right
       =link_to "Edit", edit_project_path(@project), class: "btn btn-info"
-      =link_to "Delete", project_path(@project), method: :delete, class: "btn btn-danger"
     %h1=@project.name
 
   %ol.breadcrumb
@@ -11,3 +10,8 @@
 
   %p=link_to pluralize(@project.tasks.count, 'Task'), project_tasks_path(@project)
   %p=link_to pluralize(@project.memberships.count, 'Membership'), project_memberships_path(@project)
+
+  .well
+    %h4 Delete Project
+    %p="Deleting this project will also delete #{pluralize(@project.memberships.count, 'membership')}, #{pluralize(@project.tasks.count, 'task')} and associated comments."
+    %p=link_to "Delete", project_path(@project), method: :delete, class: "btn btn-danger", data: {confirm: 'Are you sure?'}
