@@ -1,4 +1,4 @@
-class TasksController < ApplicationController
+class TasksController < PrivateController
 
   before_action do
     @project = Project.find(params[:project_id])

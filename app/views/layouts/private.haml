@@ -1,0 +1,52 @@
+!!! HTML
+%html
+  %head
+    %title gCamp
+    =stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    =javascript_include_tag 'application', 'data-turbolinks-track' => true
+    =csrf_meta_tags
+  %body
+    %nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          =link_to 'gCamp', projects_path, class: 'navbar-brand'
+        .collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li.dropdown
+              =link_to('#', class: 'dropdown-toggle', data: {toggle: 'dropdown'}, role: 'button') do
+                Projects
+                %span.caret
+              %ul.dropdown-menu
+                -current_user.projects.each do |project|
+                  %li=link_to project.name, project_path(project)
+                %li.divider
+                %li=link_to 'New Project', new_project_path
+            %li=link_to 'Users', users_path
+          %ul.nav.navbar-nav.navbar-right
+            -if current_user
+              %li=link_to "#{current_user.full_name}", user_path(current_user)
+              %li=link_to 'Sign Out', sign_out_path
+            -else
+              %li=link_to 'Sign Up', sign_up_path
+              %li=link_to 'Sign In', sign_in_path
+
+
+    .container
+      -if flash[:notice]
+        .alert.alert-success
+          =notice
+      -if flash[:alert]
+        .alert.alert-danger
+          =alert
+    =yield
+  %footer
+    .container
+      %hr
+        .text-center
+          =link_to 'Home', root_path
+          |
+          =link_to 'About', about_path
+          |
+          =link_to 'Terms', terms_path
+          |
+          =link_to 'FAQ', faq_path
