@@ -22,7 +22,7 @@ feature 'User sign in' do
     fill_in 'Password', with: @user.password
     click_button 'Sign In'
 
-    expect(current_path).to eq '/'
+    expect(current_path).to eq projects_path
     expect(page).to have_content 'You have successfully signed in'
     expect(page).to have_content 'Matt Murdock'
     expect(page).to have_content 'Sign Out'
