@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Tasks' do
 
   before :each do
-    User.create(first_name: 'Rick',
+    user = User.create(first_name: 'Rick',
                   last_name: 'Grimes',
                   email: 'walkingdead@email.com',
                   password: 'karl')
@@ -13,13 +13,14 @@ feature 'Tasks' do
     fill_in 'Password', with: 'karl'
     within('.sign-in-form') { click_on 'Sign In' }
     @project = Project.create(name: 'Example Project')
+    Membership.create!(user_id: user.id, project_id: @project.id, role_id: 1)
     @task = @project.tasks.create(description: 'Example Task', due_date: '2015-04-15')
   end
 
   scenario 'User can create a new task' do
     visit root_path
     click_on 'Projects'
-    click_link 'Example Project'
+    within('.table') { click_link 'Example Project' }
     click_link 'Task'
     click_on 'New Task'
     fill_in 'Description', with: 'Test Task'

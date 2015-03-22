@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Projects' do
 
   before :each do
-    User.create(first_name: 'Rick',
+    user = User.create!(first_name: 'Rick',
                 last_name: 'Grimes',
                 email: 'walkingdead@email.com',
                 password: 'karl')
@@ -12,7 +12,8 @@ feature 'Projects' do
     fill_in 'Email', with: 'walkingdead@email.com'
     fill_in 'Password', with: 'karl'
     within('.sign-in-form') { click_on 'Sign In' }
-    Project.create(name: 'Project Rebirth')
+    project = Project.create!(name: 'Project Rebirth')
+    Membership.create!(user_id: user.id, project_id: project.id, role_id: 1)
   end
 
   scenario 'User can create a project' do
@@ -29,7 +30,7 @@ feature 'Projects' do
   scenario 'User can see a show page for a project' do
     Project.create(name: 'Alpha')
     visit projects_path
-    click_on 'Project Rebirth'
+    within('.table') { click_on 'Project Rebirth' }
 
     expect(page).to have_content('Project Rebirth')
     expect(page).to have_content('Edit')
@@ -39,7 +40,7 @@ feature 'Projects' do
 
   scenario 'User can edit a Project' do
     visit projects_path
-    click_on 'Project Rebirth'
+    within('.table') { click_on 'Project Rebirth' }
     click_on 'Edit'
     fill_in 'Name', with: 'Super Soldier Project'
     click_on 'Update Project'
@@ -51,7 +52,7 @@ feature 'Projects' do
 
   scenario 'User can delete a project' do
     visit projects_path
-    click_on 'Project Rebirth'
+    within('.table') { click_on 'Project Rebirth' }
     click_on 'Delete'
 
     expect(page).to have_content('Project was successfully deleted')
