@@ -13,7 +13,7 @@ feature 'Projects' do
     fill_in 'Password', with: 'karl'
     within('.sign-in-form') { click_on 'Sign In' }
     project = Project.create!(name: 'Project Rebirth')
-    Membership.create!(user_id: user.id, project_id: project.id, role_id: 1)
+    Membership.create!(user_id: user.id, project_id: project.id, role_id: 2)
   end
 
   scenario 'User can create a project' do

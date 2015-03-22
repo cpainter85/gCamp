@@ -13,13 +13,14 @@ feature 'Tasks' do
     fill_in 'Password', with: 'karl'
     within('.sign-in-form') { click_on 'Sign In' }
     @project = Project.create(name: 'Example Project')
-    Membership.create!(user_id: user.id, project_id: @project.id, role_id: 1)
+    Membership.create!(user_id: user.id, project_id: @project.id, role_id: 2)
     @task = @project.tasks.create(description: 'Example Task', due_date: '2015-04-15')
   end
 
   scenario 'User can create a new task' do
     visit root_path
     click_on 'Projects'
+    
     within('.table') { click_link 'Example Project' }
     click_link 'Task'
     click_on 'New Task'
