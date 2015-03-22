@@ -1,4 +1,7 @@
 class ProjectsController < PrivateController
+  before_action :find_project, except: [:index, :new, :create]
+  before_action :ensure_project_member, only: [:show, :edit, :update, :destroy]
+
   def index
     @projects = current_user.projects
   end
@@ -18,15 +21,12 @@ class ProjectsController < PrivateController
   end
 
   def show
-    @project = Project.find(params[:id])
   end
 
   def edit
-    @project = Project.find(params[:id])
   end
 
   def update
-    @project = Project.find(params[:id])
     if @project.update(project_params)
       redirect_to project_path(@project), notice: 'Project was successfully updated'
     else
@@ -35,7 +35,7 @@ class ProjectsController < PrivateController
   end
 
   def destroy
-    Project.destroy(params[:id])
+    @project.destroy
     redirect_to projects_path, notice: 'Project was successfully deleted'
   end
 
@@ -43,5 +43,9 @@ class ProjectsController < PrivateController
 
   def project_params
     params.require(:project).permit(:name)
+  end
+
+  def find_project
+    @project = Project.find(params[:id])
   end
 end

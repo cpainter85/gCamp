@@ -9,4 +9,10 @@ class PrivateController < ApplicationController
       redirect_to sign_in_path
     end
   end
+
+  def ensure_project_member
+    if current_user.memberships.find_by(project_id: @project.id) == nil
+      redirect_to projects_path, notice: 'You do not have access to that project'
+    end
+  end
 end
