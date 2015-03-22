@@ -18,7 +18,7 @@ feature 'Projects' do
   scenario 'User can create a project' do
     visit root_path
     click_on 'Projects'
-    click_on 'New Project'
+    within('.page-header') { click_on 'New Project' }
     fill_in 'Name', with: 'Project Wide Awake'
     click_on 'Create Project'
 
@@ -60,7 +60,7 @@ feature 'Projects' do
 
   scenario 'Projects must have a name' do
     visit projects_path
-    click_on 'New Project'
+    within('.page-header') { click_on 'New Project' }
     click_on 'Create Project'
 
     expect(page).to have_no_content('Project was successfully created')
