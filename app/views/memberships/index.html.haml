@@ -11,15 +11,16 @@
     .col-md-7
       =render partial: 'shared/errors', locals: {object: @membership}
 
-  .well.col-md-7
-    .form-inline
-      =form_for [@project, @membership] do |f|
-        .form-group
-          =f.collection_select(:user_id, User.all, :id, :full_name, {prompt: 'Please select a user...'}, {class: 'form-control'})
-        .form-group
-          =f.collection_select(:role_id, Role.all, :id, :name, {}, {class: 'form-control'})
-        .form-group
-          =f.submit 'Add New Member', class: 'btn btn-primary'
+  -if current_user == @project.project_owner
+    .well.col-md-7
+      .form-inline
+        =form_for [@project, @membership] do |f|
+          .form-group
+            =f.collection_select(:user_id, User.all, :id, :full_name, {prompt: 'Please select a user...'}, {class: 'form-control'})
+          .form-group
+            =f.collection_select(:role_id, Role.all, :id, :name, {}, {class: 'form-control'})
+          .form-group
+            =f.submit 'Add New Member', class: 'btn btn-primary'
 
   .col-md-7
     %table.table
@@ -29,6 +30,9 @@
             =form_for [@project, membership] do |f|
               %tr
                 %td=link_to membership.user.full_name, user_path(membership.user)
-                %td=f.collection_select(:role_id, Role.all, :id, :name, {prompt: membership.role}, class: 'form-control')
-                %td=f.submit 'Update', class: 'btn btn-primary'
-                %td=link_to '', project_membership_path(@project, membership), method: :delete, class: 'glyphicon glyphicon-remove'
+                -if current_user == @project.project_owner
+                  %td=f.collection_select(:role_id, Role.all, :id, :name, {prompt: membership.role}, class: 'form-control')
+                  %td=f.submit 'Update', class: 'btn btn-primary'
+                  %td=link_to '', project_membership_path(@project, membership), method: :delete, class: 'glyphicon glyphicon-remove'
+                -else
+                  %td=membership.role.name.downcase
