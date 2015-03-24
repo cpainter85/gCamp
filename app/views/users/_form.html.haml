@@ -30,6 +30,12 @@
       .col-sm-6
         =f.password_field :password_confirmation, class: 'form-control'
 
+    -if current_user.admin
+      .form-group
+        =f.label :admin, class: 'col-sm-2 control-label'
+        .col-sm-6
+          =f.check_box :admin
+
     .form-group
       .col-sm-offset-2.col-sm-6
         =f.submit class: 'btn btn-primary'
