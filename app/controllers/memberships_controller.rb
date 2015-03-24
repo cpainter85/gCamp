@@ -7,6 +7,7 @@ class MembershipsController < PrivateController
   before_action :ensure_project_member
   before_action :ensure_project_owner, except: [:index, :destroy]
   before_action :ensure_project_owner_or_self, only: [:destroy]
+  before_action :ensure_last_owner, only: [:update, :destroy]
 
   def index
     @membership = @project.memberships.new
@@ -49,5 +50,12 @@ class MembershipsController < PrivateController
 
   def find_membership
     @membership = @project.memberships.find(params[:id])
+  end
+
+  def ensure_last_owner
+    if @membership.role_id == 2 && @project.memberships.where(role_id: 2).count <= 1
+      flash[:alert] = 'Projects must have at least one owner'
+      redirect_to project_memberships_path(@project)
+    end
   end
 end

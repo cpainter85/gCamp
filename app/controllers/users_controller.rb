@@ -1,4 +1,8 @@
 class UsersController < PrivateController
+
+  before_action :find_user, except: [:index, :new, :create]
+  before_action :ensure_user_is_logged_in_user, only: [:update, :destroy]
+
   def index
     @users = User.all
   end
@@ -17,15 +21,12 @@ class UsersController < PrivateController
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to users_path, notice: 'User was successfully updated.'
     else
@@ -34,10 +35,15 @@ class UsersController < PrivateController
   end
 
   def destroy
-    user = User.find(params[:id])
-    user.set_user_id_nil_on_comments
-    user.destroy
-    redirect_to users_path, notice: 'User was successfully deleted.'
+    @user.set_user_id_nil_on_comments
+    if @user == current_user
+      session.clear
+      @user.destroy
+      redirect_to root_path, notice: 'User was successfully deleted.'
+    else
+      @user.destroy
+      redirect_to users_path, notice: 'User was successfully deleted.'
+    end
   end
 
   private
@@ -45,5 +51,11 @@ class UsersController < PrivateController
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
   end
+
+  def find_user
+    @user = User.find(params[:id])
+  end
+
+
 
 end

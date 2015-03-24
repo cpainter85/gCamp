@@ -16,6 +16,10 @@
             =link_to user.first_name+' '+user.last_name, user_path(user)
           %td
             =mail_to user.email
-          %td
-            .pull-right
-              =link_to 'Edit', edit_user_path(user)
+          -if user == current_user
+            %td
+              .pull-right
+                =link_to 'Edit', edit_user_path(user)
+          -else
+            %td
+              .pull-right

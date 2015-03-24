@@ -30,4 +30,10 @@ class PrivateController < ApplicationController
       redirect_to project_path(@project)
     end
   end
+
+  def ensure_user_is_logged_in_user
+    if current_user != @user
+      render file: 'public/404.html', status: :not_found, layout: false
+    end
+  end
 end

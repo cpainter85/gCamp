@@ -33,7 +33,10 @@
                 -if current_user == @project.project_owner
                   %td=f.collection_select(:role_id, Role.all, :id, :name, {prompt: membership.role}, class: 'form-control')
                   %td=f.submit 'Update', class: 'btn btn-primary'
-                  %td=link_to '', project_membership_path(@project, membership), method: :delete, class: 'glyphicon glyphicon-remove'
+                  -if membership.role_id == 2 && @project.memberships.where(role_id: 2).count <= 1
+                    %td='You are the last owner'
+                  -else
+                    %td=link_to '', project_membership_path(@project, membership), method: :delete, class: 'glyphicon glyphicon-remove'
                 -else
                   %td=membership.role.name.downcase
                   -if current_user == membership.user

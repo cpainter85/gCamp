@@ -60,20 +60,16 @@ feature 'Users' do
     expect(page).to have_no_content('iamnotdaredevil@email.com')
   end
 
-  scenario 'Users can delete a user' do
-    User.create(first_name: 'Rick',
-                last_name: 'Grimes',
-                email: 'walkingdead@email.com',
-                password: 'karl')
+  scenario 'Users can delete themselves' do
     visit root_path
     click_on 'Users'
-    within('.table') { click_on 'Rick Grimes'}
+    within('.table') { click_on 'Matt Murdock'}
     click_on 'Edit'
     click_on 'Delete User'
 
     expect(page).to have_content('User was successfully deleted.')
-    expect(page).to have_no_content('Rick Grimes')
-    expect(page).to have_no_content('walkingdead@email.com')
+    expect(page).to have_no_content('Matt Murdock')
+    expect(page).to have_no_content('iamnotdaredevil@email.com')
   end
 
   scenario 'Users must have a first name, last name, an email, and a password' do
