@@ -24,4 +24,10 @@ class PrivateController < ApplicationController
     end
   end
 
+  def ensure_project_owner_or_self
+    if !(@project.project_owner == current_user || @membership.user == current_user)
+      flash[:alert] = 'You do not have access'
+      redirect_to project_path(@project)
+    end
+  end
 end
