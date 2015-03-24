@@ -28,7 +28,6 @@ feature 'Users' do
 
     expect(page).to have_content('User was successfully created')
     expect(page).to have_content('Peter Parker')
-    expect(page).to have_content('spiderman@email.com')
   end
 
   scenario 'User can see a show page for a user' do

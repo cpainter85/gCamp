@@ -10,5 +10,6 @@
     %dd=@user.first_name
     %dt Last name
     %dd=@user.last_name
-    %dt Email
-    %dd=mail_to @user.email
+    -if @user == current_user
+      %dt Email
+      %dd=mail_to @user.email
