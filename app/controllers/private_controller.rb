@@ -7,6 +7,7 @@ class PrivateController < ApplicationController
 
   def ensure_current_user
     unless current_user
+      session[:redirect_back] ||= request.fullpath
       flash[:alert] = 'You must sign in'
       redirect_to sign_in_path
     end
