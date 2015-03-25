@@ -4,7 +4,7 @@ class Project < ActiveRecord::Base
   has_many :memberships, dependent: :destroy
   has_many :users, through: :memberships
 
-  def project_owner
-    self.memberships.find_by(role_id: 2).user
-  end
+  # def project_owner
+  #   self.memberships.find_by(role_id: 2).user
+  # end
 end

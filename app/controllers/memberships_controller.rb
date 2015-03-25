@@ -4,8 +4,8 @@ class MembershipsController < PrivateController
     @project = Project.find(params[:project_id])
   end
   before_action :find_membership, except: [:index, :create]
-  before_action :ensure_project_member
-  before_action :ensure_project_owner, except: [:index, :destroy]
+  before_action :ensure_project_member_or_admin
+  before_action :ensure_project_owner_or_admin, except: [:index, :destroy]
   before_action :ensure_project_owner_or_self, only: [:destroy]
   before_action :ensure_last_owner, only: [:update, :destroy]
 

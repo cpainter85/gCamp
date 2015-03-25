@@ -1,7 +1,7 @@
 .container
   .page-header
     .pull-right
-      -if current_user == @project.project_owner
+      -if current_user.project_owner_or_admin(@project)
         =link_to "Edit", edit_project_path(@project), class: "btn btn-info"
     %h1=@project.name
 
@@ -12,7 +12,7 @@
   %p=link_to pluralize(@project.tasks.count, 'Task'), project_tasks_path(@project)
   %p=link_to pluralize(@project.memberships.count, 'Membership'), project_memberships_path(@project)
 
-  -if current_user == @project.project_owner
+  -if current_user.project_owner_or_admin(@project)
     .well
       %h4 Delete Project
       %p="Deleting this project will also delete #{pluralize(@project.memberships.count, 'membership')}, #{pluralize(@project.tasks.count, 'task')} and associated comments."

@@ -10,7 +10,13 @@
         %th Name
         %th Tasks
     %tbody
-      -@projects.each do |project|
-        %tr
-          %td=link_to project.name, project_path(project)
-          %td=link_to project.tasks.count, project_tasks_path(project)
+      -if current_user.admin
+        -@admin_projects.each do |project|
+          %tr
+            %td=link_to project.name, project_path(project)
+            %td=link_to project.tasks.count, project_tasks_path(project)
+      -else
+        -@projects.each do |project|
+          %tr
+            %td=link_to project.name, project_path(project)
+            %td=link_to project.tasks.count, project_tasks_path(project)

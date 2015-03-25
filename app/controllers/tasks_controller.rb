@@ -4,7 +4,7 @@ class TasksController < PrivateController
     @project = Project.find(params[:project_id])
   end
 
-  before_action :ensure_project_member
+  before_action :ensure_project_member_or_admin
 
   def index
     @tasks = @project.tasks

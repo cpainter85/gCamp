@@ -1,7 +1,7 @@
 class UsersController < PrivateController
 
   before_action :find_user, except: [:index, :new, :create]
-  before_action :ensure_user_is_logged_in_user, only: [:update, :destroy]
+  before_action :ensure_user_is_logged_in_user_or_admin, only: [:update, :destroy]
 
   def index
     @users = User.all

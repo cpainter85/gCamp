@@ -14,7 +14,7 @@
         %tr
           %td.col-sm-2
             =link_to user.full_name, user_path(user)
-          -if user == current_user
+          -if user == current_user || current_user.admin
             %td
               =mail_to user.email
             %td

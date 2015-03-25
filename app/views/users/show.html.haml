@@ -1,6 +1,6 @@
 .container
   .page-header
-    -if @user == current_user
+    -if @user == current_user || current_user.admin
       .pull-right
         =link_to "Edit", edit_user_path(@user), class: "btn btn-info"
     %h1
@@ -10,6 +10,6 @@
     %dd=@user.first_name
     %dt Last name
     %dd=@user.last_name
-    -if @user == current_user
+    -if @user == current_user || current_user.admin
       %dt Email
       %dd=mail_to @user.email

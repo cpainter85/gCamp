@@ -11,7 +11,7 @@
     .col-md-7
       =render partial: 'shared/errors', locals: {object: @membership}
 
-  -if current_user == @project.project_owner
+  -if current_user.project_owner_or_admin(@project)
     .well.col-md-7
       .form-inline
         =form_for [@project, @membership] do |f|
@@ -30,7 +30,7 @@
             =form_for [@project, membership] do |f|
               %tr
                 %td=link_to membership.user.full_name, user_path(membership.user)
-                -if current_user == @project.project_owner
+                -if current_user.project_owner_or_admin(@project)
                   %td=f.collection_select(:role_id, Role.all, :id, :name, {prompt: membership.role}, class: 'form-control')
                   %td=f.submit 'Update', class: 'btn btn-primary'
                   -if membership.role_id == 2 && @project.memberships.where(role_id: 2).count <= 1

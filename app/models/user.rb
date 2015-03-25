@@ -14,4 +14,12 @@ class User < ActiveRecord::Base
   def set_user_id_nil_on_comments
     self.comments.update_all(user_id: nil)
   end
+
+  def admin_or_project_member(project)
+    self.admin || self.memberships.find_by(project_id: project.id) != nil
+  end
+
+  def project_owner_or_admin(project)
+    self.admin || self.memberships.find_by(project_id: project.id).role_id == 2
+  end
 end
