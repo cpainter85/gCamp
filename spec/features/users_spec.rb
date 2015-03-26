@@ -37,7 +37,6 @@ feature 'Users' do
 
     expect(page).to have_content('First name Matt')
     expect(page).to have_content('Last name Murdock')
-    expect(page).to have_content('Email iamnotdaredevil@email.com')
 
   end
 
@@ -53,10 +52,8 @@ feature 'Users' do
 
     expect(page).to have_content('User was successfully updated.')
     expect(page).to have_content('Daniel Rand')
-    expect(page).to have_content('theimmortalironfist@email.com')
 
     expect(page).to have_no_content('Matt Murdock')
-    expect(page).to have_no_content('iamnotdaredevil@email.com')
   end
 
   scenario 'Users can delete themselves' do

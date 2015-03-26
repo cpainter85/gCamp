@@ -22,4 +22,8 @@ class User < ActiveRecord::Base
   def project_owner_or_admin(project)
     self.admin || self.memberships.find_by(project_id: project.id).role_id == 2
   end
+
+  def members_of_same_project(user)
+    self.projects.map{|x| x.users}.flatten.include?(user)
+  end
 end
