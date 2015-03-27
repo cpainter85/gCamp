@@ -14,7 +14,6 @@ class PrivateController < ApplicationController
   end
 
   def ensure_project_member_or_admin
-    # if current_user.memberships.find_by(project_id: @project.id) == nil
     if !current_user.admin_or_project_member(@project)
       flash[:alert] = 'You do not have access to that project'
       redirect_to projects_path
