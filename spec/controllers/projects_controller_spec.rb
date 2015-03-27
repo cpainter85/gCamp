@@ -41,7 +41,7 @@ describe ProjectsController do
 
   describe 'GET #new' do
     it 'should redirect to sign in path if user not logged in' do
-      get :index
+      get :new
 
       expect(response).to redirect_to sign_in_path
       expect(flash[:alert]).to eq 'You must sign in'

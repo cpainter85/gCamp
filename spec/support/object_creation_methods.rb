@@ -22,11 +22,11 @@ def create_membership(user, project, overrides = {})
   }.merge(overrides))
 end
 
-def create_task(overrides ={})
+def create_task(project, overrides ={})
   Task.create!({
     description: 'Race Cars Fast and Furiously',
     complete: false,
     due_date: '2015-04-03',
-    project_id: create_project.id
+    project_id: project.id
   }.merge(overrides))
 end
