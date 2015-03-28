@@ -97,4 +97,96 @@ describe UsersController do
       expect(response.status).to eq 404
     end
   end
+  describe 'PATCH #update' do
+    it 'updates a user when admin inputs valid params' do
+      user = create_user(admin: true)
+      user2 = create_user(first_name: 'Clark', last_name: 'Kent', email: 'superman@email.com', password: 'lastsonofkrypton')
+      session[:user_id] = user.id
+
+      expect {
+        patch :update, id: user2.id,
+        user: {first_name: 'Ethan', last_name: 'Crane', email: 'supreme@email.com', password: 'alanmoore'}
+      }.to change {user2.reload.full_name}.from('Clark Kent').to('Ethan Crane')
+
+      expect(flash[:notice]).to eq 'User was successfully updated.'
+      expect(response).to redirect_to users_path
+    end
+    it 'updates a user when user updates their own information' do
+      user = create_user
+      session[:user_id] = user.id
+
+      expect {
+        patch :update, id: user.id,
+        user: {email: 'iamgroot@email.com'}
+      }.to change { user.reload.email }.from('vindiesel@email.com').to('iamgroot@email.com')
+
+      expect(flash[:notice]).to eq 'User was successfully updated.'
+      expect(response).to redirect_to users_path
+    end
+    it 'does not allow non-admin to update another user\'s info' do
+      user = create_user
+      user2 = create_user(first_name: 'Clark', last_name: 'Kent', email: 'superman@email.com', password: 'lastsonofkrypton')
+      session[:user_id] = user.id
+
+      expect {
+        patch :update, id: user2.id,
+        user: {first_name: 'Kal', last_name: 'El'}
+      }.to_not change { user2.reload.full_name }
+
+      expect(response.status).to eq 404
+
+    end
+    it 'does not update a user when admin inputs invalid params' do
+      user = create_user(admin: true)
+      user2 = create_user(first_name: 'Clark', last_name: 'Kent', email: 'superman@email.com', password: 'lastsonofkrypton')
+      session[:user_id] = user.id
+
+      expect {
+        patch :update, id: user2.id,
+        user: {first_name: nil}
+      }.to_not change {user2.reload.first_name}
+
+      expect(response).to render_template :edit
+    end
+  end
+  describe 'DELETE #destroy' do
+    it 'allows an admin to delete a user' do
+      user = create_user(admin: true)
+      session[:user_id] = user.id
+      user2 = create_user(first_name: 'Bruce', last_name: 'Wayne', email: 'batman@email.com', password: 'thedarkknight')
+
+      expect {
+        delete :destroy, id: user2.id
+      }.to change { User.all.count }.by(-1)
+
+      expect(flash[:notice]).to eq 'User was successfully deleted.'
+      expect(response).to redirect_to users_path
+
+    end
+    it 'allows a user to delete themself' do
+      user = create_user(admin: true)
+      session[:user_id] = user.id
+
+      expect {
+        delete :destroy, id: user.id
+      }.to change { User.all.count }.by(-1)
+
+      expect(session[:user_id]).to eq nil
+      expect(flash[:notice]).to eq 'User was successfully deleted.'
+      expect(response).to redirect_to root_path
+
+    end
+    it 'does not allow a user to delete another user' do
+      user = create_user
+      session[:user_id] = user.id
+      user2 = create_user(first_name: 'Bruce', last_name: 'Wayne', email: 'batman@email.com', password: 'thedarkknight')
+
+      expect {
+        delete :destroy, id: user2.id
+      }.to_not change { User.all.count }
+
+      expect(response.status).to eq 404
+
+    end
+  end
 end
