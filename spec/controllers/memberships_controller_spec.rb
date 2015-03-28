@@ -69,4 +69,68 @@ describe MembershipsController do
       expect(response).to redirect_to project_path(project)
     end
   end
+
+  describe 'GET #destroy' do
+    it 'allows owner to destroy membership' do
+      user = create_user
+      user2 = create_user(first_name: 'Walter', last_name: 'White', email: 'breakingbad@email.com', password: 'heisenberg')
+      session[:user_id] = user.id
+      project = create_project
+      membership = create_membership(user, project, role_id: 2)
+      membership2 = create_membership(user2, project)
+
+      expect {
+        delete :destroy, project_id: project.id, id: membership2.id
+      }.to change { Membership.all.count }.by(-1)
+
+      expect(flash[:notice]).to eq "#{membership2.user.full_name} was successfully removed"
+      expect(response).to redirect_to project_memberships_path(project)
+
+    end
+    it 'allows admin to destroy membership' do
+      user = create_user(admin: true)
+      user2 = create_user(first_name: 'Walter', last_name: 'White', email: 'breakingbad@email.com', password: 'heisenberg')
+      session[:user_id] = user.id
+      project = create_project
+      membership = create_membership(user2, project)
+
+      expect {
+        delete :destroy, project_id: project.id, id: membership.id
+      }.to change { Membership.all.count }.by(-1)
+
+      expect(flash[:notice]).to eq "#{membership.user.full_name} was successfully removed"
+      expect(response).to redirect_to project_memberships_path(project)
+
+    end
+    it 'allows member to destroy their own membership' do
+      user = create_user
+      session[:user_id] = user.id
+      project = create_project
+      membership = create_membership(user, project)
+
+      expect {
+        delete :destroy, project_id: project.id, id: membership.id
+      }.to change { Membership.all.count }.by(-1)
+
+      expect(flash[:notice]).to eq "#{membership.user.full_name} was successfully removed"
+      expect(response).to redirect_to projects_path
+
+    end
+    it 'does not allow member to destroy someone else\'s membership\'s' do
+      user = create_user
+      session[:user_id] = user.id
+      user2 = create_user(first_name: 'Walter', last_name: 'White', email: 'breakingbad@email.com', password: 'heisenberg')
+      project = create_project
+      membership = create_membership(user, project)
+      membership2 = create_membership(user2, project)
+
+      expect {
+        delete :destroy, project_id: project.id, id: membership2.id
+      }.to_not change { Membership.all.count }
+
+      expect(flash[:alert]).to eq "You do not have access"
+      expect(response).to redirect_to project_path(project)
+
+    end
+  end
 end
