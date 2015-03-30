@@ -9,7 +9,12 @@ class TrackerAPI
       request.headers['Content-Type'] = 'application/json'
       request.headers['X-TrackerToken'] = token
     end
-    JSON.parse(response.body, symbolize_names: true)
+
+    if response.status == 403
+      403
+    else
+      JSON.parse(response.body, symbolize_names: true)
+    end
   end
 
   def stories(token, project_id)
@@ -21,12 +26,4 @@ class TrackerAPI
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  def authenticate_token(token)
-    response = @conn.get do |request|
-      request.url "/services/v5/me"
-      request.headers['Content-Type'] = 'application/json'
-      request.headers['X-TrackerToken'] = token
-    end
-    JSON.parse(response.body, symbolize_names: true)
-  end
 end

@@ -30,7 +30,7 @@
         %tr
           %th Name
       %tbody
-        -if !(@tracker_auth[:kind] == 'error')
+        -if !(@tracker_projects == 403)
           -@tracker_projects.each do |tracker_project|
             %tr
               %td=link_to tracker_project[:name], pivotal_tracker_story_path(tracker_project[:id], tracker_project[:name])
