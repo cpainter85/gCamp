@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'faraday', '~> 0.9.0'
 gem 'pry'
 gem 'haml'
 gem 'rails_12factor', '~> 0.0.3', group: :production

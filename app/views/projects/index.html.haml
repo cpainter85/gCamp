@@ -20,3 +20,16 @@
           %tr
             %td=link_to project.name, project_path(project)
             %td=link_to project.tasks.count, project_tasks_path(project)
+
+  -if current_user.pivotal_tracker_token
+    .page-header
+      %h1 Pivotal Tracker Projects
+
+    %table.table
+      %thead
+        %tr
+          %th Name
+      %tbody
+        -@tracker_projects.each do |tracker_project|
+          %tr
+            %td=tracker_project[:name]
