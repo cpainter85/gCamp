@@ -13,3 +13,5 @@
     -if current_user.members_of_same_project(@user) || current_user.admin
       %dt Email
       %dd=mail_to @user.email
+    %dt Pivotal Tracker Token
+    %dd=@user.token_privacy

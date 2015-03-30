@@ -26,4 +26,8 @@ class User < ActiveRecord::Base
   def members_of_same_project(user)
     self.projects.map{|x| x.users}.flatten.include?(user)
   end
+
+  def token_privacy
+    self.pivotal_tracker_token[0..3] + ('*'*(self.pivotal_tracker_token.length - 4))
+  end
 end
