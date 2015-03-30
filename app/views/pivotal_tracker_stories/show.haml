@@ -1,0 +1,20 @@
+.container
+  .page-header
+    .pull-right
+      %p (showing first 500)
+    %h1="Stories for #{@tracker_project}"
+
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Story
+        %th Estimate
+        %th Labels
+        %th Current State
+    %tbody
+      -@tracker_stories.first(500).each do |story|
+        %tr
+          %td=link_to story[:name], story[:url]
+          %td=story[:estimate]
+          %td=story[:labels].map {|label| label[:name]}.join(',')
+          %td=story[:current_state]

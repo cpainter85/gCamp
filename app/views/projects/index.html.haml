@@ -32,4 +32,4 @@
       %tbody
         -@tracker_projects.each do |tracker_project|
           %tr
-            %td=tracker_project[:name]
+            %td=link_to tracker_project[:name], pivotal_tracker_story_path(tracker_project[:id], tracker_project[:name])

@@ -23,6 +23,8 @@ Rails.application.routes.draw do
      end
      resources :memberships, only: [:index, :create, :update, :destroy]
    end
+
+   resources :pivotal_tracker_stories, only: [:show]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
