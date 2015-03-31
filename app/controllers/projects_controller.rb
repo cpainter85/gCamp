@@ -1,8 +1,7 @@
 class ProjectsController < PrivateController
   before_action :find_project, except: [:index, :new, :create]
   before_action :ensure_project_member_or_admin, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_project_owner_or_admin, only: [:edit, :update]
-  before_action :ensure_project_owner_or_self, only: [:destroy]
+  before_action :ensure_project_owner_or_admin, only: [:edit, :update, :destroy]
 
   def index
     @projects = current_user.projects

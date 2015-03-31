@@ -30,11 +30,7 @@ describe MembershipsController do
     end
   end
 
-  # describe 'if user is admin' do
-  RSpec.shared_examples 'if user is admin' do
-    before :each do
-      session[:user_id] = admin.id
-    end
+  RSpec.shared_examples 'admin and owner behavior' do
 
     describe 'GET #index' do
       it 'should have a new membership object' do
@@ -85,13 +81,22 @@ describe MembershipsController do
     end
   end
 
+  describe 'if user is admin' do
+    before :each do
+      session[:user_id] = admin.id
+    end
+    describe 'all pages' do
+      it_behaves_like 'admin and owner behavior'
+    end
+  end
+
   describe 'if user is owner' do
     before :each do
       membership.update_attributes(role_id: 2)
       session[:user_id] = user.id
     end
     describe 'all pages' do
-      it_behaves_like 'if user is admin'
+      it_behaves_like 'admin and owner behavior'
     end
   end
 
