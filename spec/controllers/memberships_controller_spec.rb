@@ -3,12 +3,6 @@ require 'rails_helper'
 describe MembershipsController do
 
   let(:user) { create_user }
-  let(:admin) { create_user(
-    first_name: 'Wilson',
-    last_name: 'Fisk',
-    email: 'kingpin@email.com',
-    password: 'kingpinofcrime',
-    admin: true) }
   let(:user2) { create_user(first_name: 'Walter',
     last_name: 'White',
     email: 'breakingbad@email.com',
@@ -83,7 +77,8 @@ describe MembershipsController do
 
   describe 'if user is admin' do
     before :each do
-      session[:user_id] = admin.id
+      user.update_attributes(admin: true)
+      session[:user_id] = user.id
     end
     describe 'all pages' do
       it_behaves_like 'admin and owner behavior'
