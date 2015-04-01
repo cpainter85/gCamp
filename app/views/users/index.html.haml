@@ -15,7 +15,7 @@
           %td.col-sm-2
             =link_to user.full_name, user_path(user)
           %td
-            -if current_user.members_of_same_project(user) || current_user.admin
+            -if current_user.members_of_same_project(user) || current_user.admin || user == current_user
               =mail_to user.email
             %td
               .pull-right

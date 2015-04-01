@@ -10,7 +10,7 @@
     %dd=@user.first_name
     %dt Last name
     %dd=@user.last_name
-    -if current_user.members_of_same_project(@user) || current_user.admin
+    -if current_user.members_of_same_project(@user) || current_user.admin || @user == current_user
       %dt Email
       %dd=mail_to @user.email
     %dt Pivotal Tracker Token
